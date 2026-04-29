@@ -4,18 +4,21 @@ import numpy as np
 import os
 from diffusers import UNet2DConditionModel, DDIMScheduler
 from tqdm import tqdm
-from train_diffusion import PhysicsProjector
 
-def generar_galaxia(modelo_path, masa_norm, sfr_norm, radio_norm, img_size=512):
+# Importamos el proyector Y el tamaño de imagen centralizado
+from train_diffusion import PhysicsProjector, IMG_SIZE
+
+# Fíjate que ya no hace falta pasarle img_size a la función
+def generar_galaxia(modelo_path, masa_norm, sfr_norm, radio_norm):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     
     if device.type == 'cpu':
         torch.set_num_threads(os.cpu_count() or 4)
         
-    print(f"🌌 Iniciando generación en: {device} (Hilos: {torch.get_num_threads()})")
+    print(f"🌌 Iniciando generación a {IMG_SIZE}x{IMG_SIZE}px en: {device} (Hilos: {torch.get_num_threads()})")
 
     unet = UNet2DConditionModel(
-        sample_size=img_size,
+        sample_size=IMG_SIZE,
         in_channels=3,
         out_channels=3,
         cross_attention_dim=256,
@@ -38,7 +41,8 @@ def generar_galaxia(modelo_path, masa_norm, sfr_norm, radio_norm, img_size=512):
 
     scheduler = DDIMScheduler(num_train_timesteps=1000)
 
-    image = torch.randn((1, 3, img_size, img_size)).to(device)
+    # Usa el IMG_SIZE global
+    image = torch.randn((1, 3, IMG_SIZE, IMG_SIZE)).to(device)
     
     # Creamos el tensor con los 3 parámetros físicos que has elegido
     phys_vector = torch.tensor([[masa_norm, sfr_norm, radio_norm]], dtype=torch.float32).to(device)
@@ -73,5 +77,5 @@ if __name__ == "__main__":
         masa_norm=0.8,   # Galaxia masiva
         sfr_norm=0.9,    # Mucha formación estelar (brazos azules)
         radio_norm=0.5,  # Tamaño medio
-        img_size=128
+        # Ya no ponemos el img_size aquí
     )

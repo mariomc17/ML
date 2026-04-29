@@ -8,6 +8,12 @@ import os
 
 from dataset import GalaxiasFisicasDataset 
 
+# =====================================================================
+# EL CUADRO DE MANDO CENTRAL (Toca la resolución SOLO aquí)
+# =====================================================================
+IMG_SIZE = 128
+# =====================================================================
+
 class PhysicsProjector(nn.Module):
     def __init__(self, input_dim=3, embed_dim=256):
         super().__init__()
@@ -23,12 +29,11 @@ class PhysicsProjector(nn.Module):
 def main():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    IMG_SIZE = 128
     BATCH_SIZE = 4
     EPOCHS = 10
     LR = 1e-4
 
-    # Cargar datos
+    # Cargar datos (Usa la variable global IMG_SIZE)
     dataset = GalaxiasFisicasDataset(
         csv_path="/home/mario/ML/galaxias_sdss.csv", 
         csv_brazos_path="/home/mario/ML/analisis_brazos_88.csv",
@@ -36,10 +41,11 @@ def main():
         img_size=IMG_SIZE
     )
     dataloader = DataLoader(dataset, batch_size=BATCH_SIZE, shuffle=True, num_workers=4, pin_memory=True)
+    
     # Ruido
     noise_scheduler = DDPMScheduler(num_train_timesteps=1000)
     
-    # Red en blanco
+    # Red en blanco (Usa la variable global IMG_SIZE)
     unet = UNet2DConditionModel(
         sample_size=IMG_SIZE,
         in_channels=3,
