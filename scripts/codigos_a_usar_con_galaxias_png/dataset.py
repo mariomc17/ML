@@ -8,7 +8,7 @@ import numpy as np
 import json # Importamos json al principio
 
 class GalaxiasFisicasDataset(Dataset):
-    def __init__(self, csv_path, csv_brazos_path, images_dir, img_size=512):
+    def __init__(self, csv_path, csv_brazos_path, images_dir, img_size):
         self.images_dir = images_dir
         
         # 1. Cargar AMBOS CSVs asegurando que OBJID es texto

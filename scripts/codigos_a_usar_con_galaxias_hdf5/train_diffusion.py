@@ -7,7 +7,6 @@ from tqdm import tqdm
 import os
 from dataset import GalaxiasFisicasDataset 
 
-
 IMG_SIZE = 128
 BATCH_SIZE = 4
 EPOCHS = 10

@@ -23,7 +23,7 @@ class PhysicsProjector(nn.Module):
 def main():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    IMG_SIZE = 512
+    IMG_SIZE = 128
     BATCH_SIZE = 4
     EPOCHS = 10
     LR = 1e-4
