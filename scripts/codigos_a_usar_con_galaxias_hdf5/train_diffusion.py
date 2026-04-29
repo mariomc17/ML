@@ -14,7 +14,7 @@ EPOCHS = 10
 LR = 1e-4
 
 # Ruta donde pondrás el archivo único .h5 en el servidor de la A100
-HDF5_PATH = "/home/mario/ML/dataset_galaxias.h5" 
+HDF5_PATH = "/home/mario/ML/codigos_a_usar_con_galaxias_hdf5/dataset_galaxias.h5" 
 CHECKPOINT_DIR = "checkpoints"
 # =====================================================================
 
