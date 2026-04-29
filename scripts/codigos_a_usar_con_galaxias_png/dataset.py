@@ -28,6 +28,7 @@ class GalaxiasFisicasDataset(Dataset):
                 galaxias_validas.append(row)
         
         self.df = pd.DataFrame(galaxias_validas).reset_index(drop=True)
+        self.df = self.df.head(5)
         print(f"🚀 Dataset cargado: Se encontraron {len(self.df)} imágenes válidas con datos físicos y de brazos.")
         
         # 4. STATS para Min-Max Scaling (Solo de los 3 parámetros elegidos)
