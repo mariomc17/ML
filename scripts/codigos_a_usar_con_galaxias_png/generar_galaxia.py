@@ -62,7 +62,7 @@ def generar_galaxia(modelo_path, masa_norm, sfr_norm, radio_norm, img_size=512):
     plt.title(f"Galaxia Generada\nMasa={masa_norm:.2f} | SFR={sfr_norm:.2f} | Radio={radio_norm:.2f}")
     
     # Guardamos la imagen en alta calidad para tu TFG
-    plt.savefig("mi_tercera_galaxia.png", dpi=300, bbox_inches='tight')
+    plt.savefig("mi_cuarta_galaxia.png", dpi=300, bbox_inches='tight')
     plt.show()
 
 if __name__ == "__main__":
@@ -73,5 +73,5 @@ if __name__ == "__main__":
         masa_norm=0.8,   # Galaxia masiva
         sfr_norm=0.9,    # Mucha formación estelar (brazos azules)
         radio_norm=0.5,  # Tamaño medio
-        img_size=512
+        img_size=128
     )
